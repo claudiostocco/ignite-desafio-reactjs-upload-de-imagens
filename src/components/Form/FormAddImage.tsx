@@ -27,7 +27,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
       // TODO REQUIRED, LESS THAN 10 MB AND ACCEPTED FORMATS VALIDATIONS
       required: 'Arquivo obrigatório',
       validate: {
-        lessThan10MB: v =>
+        lessThan10MB: (v: FileList) =>
           v[0].size <= 10485760 || 'O arquivo deve ser menor que 10MB',
         acceptedFormats: (v: FileList) => {
           return (
@@ -40,12 +40,21 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
     },
     title: {
       required: 'Título obrigatório',
-      minLength: 'Mínimo de 2 caracteres',
-      maxLength: 'Máximo de 20 caracteres',
+      minLength: {
+        value: 2,
+        message: 'Mínimo de 2 caracteres',
+      },
+      maxLength: {
+        value: 20,
+        message: 'Máximo de 20 caracteres',
+      },
     },
     description: {
       required: 'Descrição obrigatória',
-      maxLength: 'Máximo de 65 caracteres',
+      maxLength: {
+        value: 65,
+        message: 'Máximo de 65 caracteres',
+      },
     },
   };
 
@@ -122,14 +131,14 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
           name="title"
           placeholder="Título da imagem..."
           error={errors.title}
-          {...register('image', formValidations.title)}
+          {...register('title', formValidations.title)}
         />
 
         <TextInput
           name="description"
           placeholder="Descrição da imagem..."
           error={errors.description}
-          {...register('image', formValidations.description)}
+          {...register('description', formValidations.description)}
         />
       </Stack>
 
