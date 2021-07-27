@@ -17,8 +17,6 @@ interface FormAddImageProps {
   closeModal: () => void;
 }
 
-// https://github.com/MullerEsposito/ignite-reactjs-upload-de-imagens
-
 export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const [imageUrl, setImageUrl] = useState('');
   const [localImageUrl, setLocalImageUrl] = useState('');
